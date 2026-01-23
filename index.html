@@ -18,7 +18,7 @@
       justify-content: center;
       align-items: center;
       font-family: 'Georgia', serif;
-      overflow: hidden;
+      overflow: auto; /* Permitimos scroll en la pantalla */
       padding: 20px;
     }
 
@@ -28,14 +28,17 @@
       border-radius: 22px;
       text-align: center;
       width: 100%;
-      max-width: 340px;
+      max-width: 480px; /* mayor ancho para lectura */
       box-shadow: 0 12px 30px rgba(0,0,0,0.25);
       animation: aparecer 1.4s ease;
+      max-height: calc(100vh - 80px); /* Limita altura y permite scroll interno */
+      overflow-y: auto;
     }
 
     .foto {
       width: 100%;
-      height: 260px;
+      height: 38vh;
+      max-height: 320px;
       border-radius: 18px;
       overflow: hidden;
       margin-bottom: 16px;
@@ -46,19 +49,30 @@
       height: 100%;
       object-fit: cover; /* CLAVE */
       object-position: center;
+      display: block;
     }
 
     h1 {
       color: #e63950;
-      margin: 8px 0;
-      font-size: 24px;
+      margin: 8px 0 10px;
+      font-size: 26px;
     }
 
-    p {
+    .texto {
       color: #444;
       font-size: 16px;
-      line-height: 1.6;
+      line-height: 1.7;
       margin: 10px 0;
+      text-align: left; /* Mejor lectura en párrafos largos */
+    }
+
+    .texto p {
+      margin: 0 0 12px 0;
+    }
+
+    .destacado {
+      color: #e63950;
+      font-weight: 700;
     }
 
     button {
@@ -88,6 +102,13 @@
       from { transform: translateY(100vh); }
       to { transform: translateY(-10vh); }
     }
+
+    /* Pequeñas mejoras para móviles */
+    @media (max-width: 420px) {
+      .card { padding: 18px; border-radius: 16px; }
+      h1 { font-size: 22px; }
+      .texto { font-size: 15px; }
+    }
   </style>
 </head>
 
@@ -101,25 +122,22 @@
   </div>
 
   <h1>Wendoline ❤️</h1>
-  <p>
-    Hola bonita, ¿comó estás? <br>
-    Espero que estés muy bien. Para cuando leas esto, espero que estes junto a mi,
-    cenando en un restaurante, en el parque, en la playa o un lugar especial. <br>
-    Si no estas en algun lugar asi, no importa, solo quiero decirte que todo este tiempo que llevo conociendote,<br>
-    me he dado cuenta de la gran persona que eres, y que no hay, ni habrá alguien más como tú.<br>
-    En verdad eres lo mejor que me ha pasado en la vida. <br> 
-    Me has ayudado en muchisimas cosas, me has dado amor y cariño de mil formas que nisiquiera alcanzo a reaccionar.<br>
-    Aquellos detallitos como llevarme al cine a ver mi pelicula favorita, siempre hacerme comidita, darme regalitos,
-    hacerme un video con amor y hacerme una fiestita sorpresa entre muchas mas.
-    son cosas de las que siento que no pude demostrar lo mucho que me gustaron. <br>
-    Todo lo aprecio mucho. A ti te quiero muchisimo. 
-    
-    No fue casualidad.<br>
-    Fue destino, fue tiempo,<br>
-    y fueron ganas de elegirte.
-  </p>
 
-  <button onclick="iniciar()">Toca aquí 💖</button>
+  <div class="texto" aria-label="Mensaje para Wendoline">
+    <p>Hola bonita, ¿cómo estás? Espero que estés muy bien.</p>
+
+    <p>Para cuando leas esto, espero que estés junto a mí — cenando en un restaurante, en el parque, en la playa o en algún lugar especial. Si no estás en un lugar así no importa; solo quiero decirte que todo este tiempo que llevo conociéndote me he dado cuenta de la gran persona que eres, y que no hay ni habrá alguien más como tú.</p>
+
+    <p>En verdad eres lo mejor que me ha pasado en la vida. Me has ayudado en muchísimas cosas, me has dado amor y cariño de mil formas que ni siquiera alcanzo a reaccionar.</p>
+
+    <p>Aquellos detallitos: llevarme al cine a ver mi película favorita, siempre hacerme comidita, darme regalitos, hacerme un video con amor, y la fiestita sorpresa, entre muchas más, son cosas que aprecio profundamente. Siento que no siempre pude demostrar lo mucho que me gustaron. Todo lo aprecio mucho. A ti te quiero muchísimo.</p>
+
+    <p class="destacado">No fue casualidad.<br>Fue destino, fue tiempo,<br>y fueron ganas de elegirte.</p>
+  </div>
+
+  <div style="text-align:center">
+    <button type="button" onclick="iniciar()" aria-label="Tocar para preguntar">Toca aquí 💖</button>
+  </div>
 </div>
 
 <script>
@@ -127,23 +145,23 @@
     document.getElementById("musica").play();
     document.getElementById("contenido").innerHTML = `
       <h1>¿Quieres ser mi novia? 💍</h1>
-      <p>
-        Prometo cuidarte,<br>
+      <div class="texto">
+        <p>Prometo cuidarte,<br>
         respetarte y amarte,<br>
-        incluso en los días difíciles.<br><br>
-        Hoy, mañana y siempre.
-      </p>
-      <button onclick="final()">Sí ❤️</button>
+        incluso en los días difíciles.</p>
+        <p>Hoy, mañana y siempre.</p>
+        <div style="text-align:center"><button type="button" onclick="final()">Sí ❤️</button></div>
+      </div>
     `;
   }
 
   function final() {
     document.getElementById("contenido").innerHTML = `
       <h1>Te amo, Wendoline ❤️</h1>
-      <p>
-        Gracias por decir que sí.<br>
-        Este es solo el comienzo.
-      </p>
+      <div class="texto">
+        <p>Gracias por decir que sí.<br>
+        Este es solo el comienzo.</p>
+      </div>
     `;
   }
 
@@ -159,5 +177,3 @@
 
 </body>
 </html>
-
-
