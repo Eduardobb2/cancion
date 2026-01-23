@@ -10,6 +10,10 @@
       box-sizing: border-box;
     }
 
+    :root {
+      --safe-bottom: env(safe-area-inset-bottom);
+    }
+
     body {
       margin: 0;
       min-height: 100vh;
@@ -23,6 +27,7 @@
       font-family: 'Georgia', serif;
       overflow: auto; /* Permitimos scroll en la pantalla */
       padding: 20px;
+      padding-bottom: calc(20px + var(--safe-bottom)); /* espacio extra para home indicator */
     }
 
     .card {
@@ -34,8 +39,9 @@
       max-width: 480px; /* mayor ancho para lectura */
       box-shadow: 0 12px 30px rgba(0,0,0,0.25);
       animation: aparecer 1.4s ease;
-      max-height: calc(100vh - 80px); /* Limita altura y permite scroll interno */
-      overflow-y: auto;
+      max-height: calc(100vh - 80px);
+      overflow-y: auto; /* permite scroll dentro de la tarjeta */
+      padding-bottom: calc(22px + var(--safe-bottom)); /* asegura espacio debajo del contenido */
     }
 
     .foto {
@@ -53,6 +59,15 @@
       object-fit: cover; /* CLAVE */
       object-position: center;
       display: block;
+    }
+
+    .puppy {
+      width: 90%;
+      max-width: 260px;
+      border-radius: 14px;
+      margin: 8px auto 12px auto;
+      display: block;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
     }
 
     h1 {
@@ -78,7 +93,14 @@
       font-weight: 700;
     }
 
-    button {
+    .button-row {
+      text-align: center;
+      margin-top: 12px;
+      padding-bottom: 6px; /* pequeño espacio extra */
+    }
+
+    /* Hacemos que el CTA se quede por encima del home indicator y de barras */
+    .cta {
       background: #e63950;
       color: white;
       border: none;
@@ -86,7 +108,10 @@
       font-size: 17px;
       border-radius: 30px;
       cursor: pointer;
-      margin-top: 18px;
+      display: inline-block;
+      position: sticky;
+      bottom: calc(12px + var(--safe-bottom));
+      z-index: 6;
     }
 
     @keyframes aparecer {
@@ -112,6 +137,7 @@
       .card { padding: 18px; border-radius: 16px; }
       h1 { font-size: 22px; }
       .texto { font-size: 15px; }
+      .puppy { max-width: 200px; }
     }
   </style>
 </head>
@@ -139,30 +165,41 @@
     <p class="destacado">No fue casualidad.<br>Fue destino, fue tiempo,<br>y fueron ganas de elegirte.</p>
   </div>
 
-  <div style="text-align:center">
-    <button type="button" onclick="iniciar()" aria-label="Tocar para preguntar">Toca aquí 💖</button>
+  <div class="button-row">
+    <button type="button" class="cta" onclick="iniciar()" aria-label="Tocar para preguntar">Toca aquí 💖</button>
   </div>
 </div>
 
 <script>
   function iniciar() {
     document.getElementById("musica").play();
+
+    // Imagen de un perrito golden (Unsplash) — puedes cambiarla por un archivo local si prefieres
+    const puppyUrl = 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=800&q=80';
+
     document.getElementById("contenido").innerHTML = `
       <h1>¿Quieres ser mi novia? 💍</h1>
-      <div class="texto">
+      <img class=\"puppy\" src=\"${puppyUrl}\" alt=\"Perrito pidiendo ser tu novia\">
+      <div class=\"texto\">
         <p>Prometo cuidarte,<br>
         respetarte y amarte,<br>
         incluso en los días difíciles.</p>
         <p>Hoy, mañana y siempre.</p>
-        <div style="text-align:center"><button type="button" onclick="final()">Sí ❤️</button></div>
+        <div class=\"button-row\"><button type=\"button\" class=\"cta\" onclick=\"final()\">Sí ❤️</button></div>
       </div>
     `;
+
+    // Después de reemplazar el contenido, hacer scroll para asegurar que el botón quede visible en pantallas pequeñas
+    setTimeout(() => {
+      const cta = document.querySelector('.cta');
+      if (cta) cta.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 300);
   }
 
   function final() {
     document.getElementById("contenido").innerHTML = `
       <h1>Te amo, Wendoline ❤️</h1>
-      <div class="texto">
+      <div class=\"texto\">
         <p>Gracias por decir que sí.<br>
         Este es solo el comienzo.</p>
       </div>
