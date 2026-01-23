@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para Wendoline ❤️</title>
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(180deg, #ff9a9e, #fad0c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Georgia', serif;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 28px;
+      border-radius: 25px;
+      text-align: center;
+      width: 90%;
+      max-width: 360px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+      animation: aparecer 1.8s ease;
+    }
+
+    img {
+      width: 100%;
+      border-radius: 20px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      color: #e63950;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #444;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    button {
+      background: #e63950;
+      color: white;
+      border: none;
+      padding: 14px 30px;
+      font-size: 18px;
+      border-radius: 30px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    @keyframes aparecer {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 22px;
+      animation: flotar 6s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes flotar {
+      from { transform: translateY(100vh); }
+      to { transform: translateY(-10vh); }
+    }
+  </style>
+</head>
+
+<body>
+
+<audio id="musica" src="amor.m4a"></audio>
+
+<div class="card" id="contenido">
+  <img src="foto.jpg" alt="Yo">
+  <h1>Wendoline ❤️</h1>
+  <p>
+    No fue casualidad.<br>
+    Fue destino, fue tiempo,<br>
+    y fueron ganas de elegirte.
+  </p>
+  <button onclick="iniciar()">Toca aquí 💖</button>
+</div>
+
+<script>
+  function iniciar() {
+    document.getElementById("musica").play();
+    document.getElementById("contenido").innerHTML = `
+      <h1>¿Quieres ser mi novia? 💍</h1>
+      <p>
+        Prometo cuidarte,<br>
+        respetarte y amarte,<br>
+        incluso en los días difíciles.<br><br>
+        Hoy, mañana y siempre.
+      </p>
+      <button onclick="final()">Sí ❤️</button>
+    `;
+  }
+
+  function final() {
+    document.getElementById("contenido").innerHTML = `
+      <h1>Te amo, Wendoline 🥹❤️</h1>
+      <p>
+        Gracias por decir que sí.<br>
+        Este es solo el comienzo.
+      </p>
+    `;
+  }
+
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+  }, 350);
+</script>
+
+</body>
+</html>
