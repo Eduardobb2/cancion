@@ -61,15 +61,6 @@
       display: block;
     }
 
-    .puppy {
-      width: 90%;
-      max-width: 260px;
-      border-radius: 14px;
-      margin: 8px auto 12px auto;
-      display: block;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-    }
-
     h1 {
       color: #e63950;
       margin: 8px 0 10px;
@@ -137,7 +128,6 @@
       .card { padding: 18px; border-radius: 16px; }
       h1 { font-size: 22px; }
       .texto { font-size: 15px; }
-      .puppy { max-width: 200px; }
     }
   </style>
 </head>
@@ -174,22 +164,19 @@
   function iniciar() {
     document.getElementById("musica").play();
 
-    // Imagen de un perrito golden (Unsplash) — puedes cambiarla por un archivo local si prefieres
-    const puppyUrl = 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=800&q=80';
-
+    // Mostrar la pregunta sin imagen de perrito
     document.getElementById("contenido").innerHTML = `
       <h1>¿Quieres ser mi novia? 💍</h1>
-      <img class=\"puppy\" src=\"${puppyUrl}\" alt=\"Perrito pidiendo ser tu novia\">
-      <div class=\"texto\">
+      <div class="texto">
         <p>Prometo cuidarte,<br>
         respetarte y amarte,<br>
         incluso en los días difíciles.</p>
         <p>Hoy, mañana y siempre.</p>
-        <div class=\"button-row\"><button type=\"button\" class=\"cta\" onclick=\"final()\">Sí ❤️</button></div>
+        <div class="button-row"><button type="button" class="cta" onclick="final()">Sí ❤️</button></div>
       </div>
     `;
 
-    // Después de reemplazar el contenido, hacer scroll para asegurar que el botón quede visible en pantallas pequeñas
+    // Aseguramos que el CTA quede visible en pantalla (especialmente en iOS)
     setTimeout(() => {
       const cta = document.querySelector('.cta');
       if (cta) cta.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -199,7 +186,7 @@
   function final() {
     document.getElementById("contenido").innerHTML = `
       <h1>Te amo, Wendoline ❤️</h1>
-      <div class=\"texto\">
+      <div class="texto">
         <p>Gracias por decir que sí.<br>
         Este es solo el comienzo.</p>
       </div>
