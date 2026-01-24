@@ -64,7 +64,6 @@
     h1 {
       color: #e63950;
       margin: 8px 0 10px;
-      font-size: 26px;
     }
 
     .texto {
@@ -150,8 +149,6 @@
 
     <p>En verdad eres lo mejor que me ha pasado en la vida. Me has ayudado en muchísimas cosas, me has dado amor y cariño de mil formas que ni siquiera alcanzo a reaccionar.</p>
 
-    <p>Aquellos detallitos: llevarme al cine a ver mi película favorita, siempre hacerme comidita, darme regalitos, hacerme un video con amor, y la fiestita sorpresa, entre muchas más, son cosas que aprecio profundamente. Siento que no siempre pude demostrar lo mucho que me gustaron. Todo lo aprecio mucho. A ti te quiero muchísimo.</p>
-
     <p class="destacado">No fue casualidad.<br>Fue destino, fue tiempo,<br>y fueron ganas de elegirte.</p>
   </div>
 
@@ -164,17 +161,38 @@
   function iniciar() {
     document.getElementById("musica").play();
 
-    // Mostrar la pregunta sin imagen de perrito
+    // Insertamos la pregunta y añadimos la imagen "fotoProp.jpeg" debajo del mensaje.
+    // Si prefieres la imagen arriba, mueve el bloque <div class="foto"> al inicio del template (ver comentario abajo).
     document.getElementById("contenido").innerHTML = `
       <h1>¿Quieres ser mi novia? 💍</h1>
+
       <div class="texto">
-        <p>Prometo cuidarte,<br>
-        respetarte y amarte,<br>
-        incluso en los días difíciles.</p>
-        <p>Hoy, mañana y siempre.</p>
+        <p>He pensado en ti todos los días, y hoy quiero preguntarte algo muy importante.</p>
+        <p>¿Quieres ser mi novia?</p>
+        <div class="button-row"><button type="button" class="cta" onclick="final()">Sí ❤️</button></div>
+      </div>
+
+      <!-- Imagen fotoProp debajo del cuadro de mensaje -->
+      <div class="foto" aria-hidden="false" style="margin-top:12px;">
+        <img src="fotoProp.jpeg" alt="Foto especial">
+      </div>
+    `;
+
+    /* Si quieres la imagen arriba del cuadro, usa este template en lugar del de arriba:
+    document.getElementById("contenido").innerHTML = `
+      <div class="foto">
+        <img src="fotoProp.jpg" alt="Foto especial">
+      </div>
+
+      <h1>¿Quieres ser mi novia? 💍</h1>
+
+      <div class="texto">
+        <p>He pensado en ti todos los días, y hoy quiero preguntarte algo muy importante.</p>
+        <p>¿Quieres ser mi novia?</p>
         <div class="button-row"><button type="button" class="cta" onclick="final()">Sí ❤️</button></div>
       </div>
     `;
+    */
 
     // Aseguramos que el CTA quede visible en pantalla (especialmente en iOS)
     setTimeout(() => {
