@@ -51,13 +51,31 @@
       border-radius: 18px;
       overflow: hidden;
       margin-bottom: 16px;
+      background: #000; /* evita franjas blancas si la imagen no llena el área */
     }
 
     .foto img {
       width: 100%;
       height: 100%;
-      object-fit: cover; /* CLAVE */
+      object-fit: cover; /* CLAVE: por defecto las fotos se recortan para cubrir */
       object-position: center;
+      display: block;
+    }
+
+    /* Estilos para mostrar la foto completa sin recorte */
+    .foto.full {
+      height: auto;              /* la caja ajusta su altura al contenido */
+      max-height: 60vh;         /* límite razonable para móviles */
+      border-radius: 12px;
+      background: #000;         /* fondo oscuro si hay espacio vacío */
+    }
+
+    .foto.full img {
+      width: 100%;
+      height: auto;             /* altura automática para que no se recorte */
+      max-height: 60vh;
+      object-fit: contain;      /* importante: muestra la imagen completa */
+      object-position: center top;
       display: block;
     }
 
@@ -145,13 +163,10 @@
   <div class="texto" aria-label="Mensaje para Wendoline">
     <p>Hola bonita, ¿cómo estás? Espero que estés muy bien.</p>
 
-    <p>Para cuando leas esto, espero que estés junto a mí — cenando en un restaurante, en el parque, en la playa o en algún lugar especial. Si no estás en un lugar así no importa; solo quiero decirte que todo este tiempo que llevo conociéndote me he dado cuenta de la gran persona que eres, y que no hay ni habrá alguien más como tú.</p>
-
+    <p>Para cuando leas esto, espero que estés junto a mí — cenando en un restaurante, en el parque, en la playa o en algún lugar especial. Si no estás en un lugar así no importa; solo quiero d[...]\n
     <p>En verdad eres lo mejor que me ha pasado en la vida. Me has ayudado en muchísimas cosas, me has dado amor y cariño de mil formas que ni siquiera alcanzo a reaccionar.</p>
 
-    <p>Aquellos detalles como regalarme ropa de la paca, hacerme un video bien bonito de nosotros, darme de comer, llevarme al cine a ver mi pelicul favorita, regalarme detallitos, flores, y la decoracion sopresa de mi cumpleaños fue algo demasiado bonito de tu parte que nunca se me va a olvidar, sobre todo porque ni siquiera mis papas lo habrian hecho. Todo lo guardo en el corazon, y lo aprecio muchisimo.</p>
-    <p>Por todo tu amor, tu personalidad, tu forma de pensar, tu apoyo, tu preocupacion, tus inteligencia, tu paciencia, tu fisico(bien chula), tu familia, tus planes, tus ganas de ayudar a los demas, el camino que hemos tomado juntos. Todo hace que te vea como mi futura esposa, mi acompañante de vida, con la que quiero vivir con muchos perritos y chamaquillos. </p>
-    <p class="destacado">No fue casualidad.<br>Fue destino, fue tiempo,<br>y fueron ganas de elegirte.</p>
+    <p>Aquellos detalles como regalarme ropa de la paca, hacerme un video bien bonito de nosotros, darme de comer, llevarme al cine a ver mi pelicul favorita, regalarme detallitos, flores, y la decora[...]\n    <p>Por todo tu amor, tu personalidad, tu forma de pensar, tu apoyo, tu preocupacion, tus inteligencia, tu paciencia, tu fisico(bien chula), tu familia, tus planes, tus ganas de ayudar a los demas,[...]\n    <p class="destacado">No fue casualidad.<br>Fue destino, fue tiempo,<br>y fueron ganas de elegirte.</p>
   </div>
 
   <div class="button-row">
@@ -164,7 +179,7 @@
     document.getElementById("musica").play();
 
     // Insertamos la pregunta y añadimos la imagen "fotoProp.jpeg" debajo del mensaje.
-    // Si prefieres la imagen arriba, mueve el bloque <div class="foto"> al inicio del template (ver comentario abajo).
+    // La clase "full" hace que la imagen se muestre completa (object-fit: contain).
     document.getElementById("contenido").innerHTML = `
       <h1>¿Quieres ser mi novia? 💍</h1>
 
@@ -174,16 +189,16 @@
         <div class="button-row"><button type="button" class="cta" onclick="final()">Sí ❤️</button></div>
       </div>
 
-      <!-- Imagen fotoProp debajo del cuadro de mensaje -->
-      <div class="foto" aria-hidden="false" style="margin-top:12px;">
+      <!-- Imagen fotoProp debajo del cuadro de mensaje; usamos la clase "full" para que no se recorte -->
+      <div class="foto full" aria-hidden="false" style="margin-top:12px;">
         <img src="fotoProp.jpeg" alt="Foto especial">
       </div>
     `;
 
     /* Si quieres la imagen arriba del cuadro, usa este template en lugar del de arriba:
     document.getElementById("contenido").innerHTML = `
-      <div class="foto">
-        <img src="fotoProp.jpg" alt="Foto especial">
+      <div class="foto full">
+        <img src="fotoProp.jpeg" alt="Foto especial">
       </div>
 
       <h1>¿Quieres ser mi novia? 💍</h1>
