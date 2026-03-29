@@ -16,32 +16,39 @@
 
     body {
       margin: 0;
-      min-height: 100vh;
-      background: linear-gradient(180deg, #ff9a9e, #fad0c4);
-      background-attachment: fixed; /* Fondo fijo */
-      background-size: cover;
-      background-position: center;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: 'Georgia', serif;
-      /* Permitimos scroll en la pantalla */
-      /*padding: 20px;
-      padding-bottom: calc(20px + var(--safe-bottom)); /* espacio extra para home indicator */
+  min-height: 100vh;
+
+  /* 🔥 GRADIENT ANIMADO PRO */
+  background: linear-gradient(270deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
+  background-size: 600% 600%;
+  animation: gradientMove 12s ease infinite;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: 'Georgia', serif;
     }
 
     .card {
-      background: white;
-      padding: 22px;
-      border-radius: 22px;
-      text-align: center;
-      width: 100%;
-      max-width: 480px; /* mayor ancho para lectura */
-      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
-      animation: aparecer 1.4s ease;
-      max-height: calc(100vh - 80px);
-      overflow-y: auto; /* permite scroll dentro de la tarjeta */
-      padding-bottom: calc(22px + var(--safe-bottom)); /* asegura espacio debajo del contenido */
+     background: rgba(255, 255, 255, 0.25); /* efecto vidrio */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  padding: 22px;
+  border-radius: 22px;
+  text-align: center;
+  width: 100%;
+  max-width: 480px;
+
+  box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+  border: 1px solid rgba(255,255,255,0.3);
+
+  animation: aparecer 1.4s ease;
+
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+  padding-bottom: calc(22px + var(--safe-bottom));
     }
 
     .foto {
@@ -109,17 +116,25 @@
 
     /* Hacemos que el CTA se quede por encima del home indicator y de barras */
     .cta {
-      background: #e63950;
-      color: white;
-      border: none;
-      padding: 14px 28px;
-      font-size: 17px;
-      border-radius: 30px;
-      cursor: pointer;
-      display: inline-block;
-      position: sticky;
-      bottom: calc(12px + var(--safe-bottom));
-      z-index: 6;
+      background: linear-gradient(135deg, #e63950, #ff6f91);
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  font-size: 17px;
+  border-radius: 30px;
+  cursor: pointer;
+  display: inline-block;
+  position: sticky;
+  bottom: calc(12px + var(--safe-bottom));
+  z-index: 6;
+
+  transition: all 0.3s ease;
+}
+
+.cta:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(230,57,80,0.4);
+}
     }
 
     @keyframes aparecer {
@@ -127,18 +142,61 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    
     .heart {
-      position: absolute;
-      font-size: 20px;
-      animation: flotar 7s linear infinite;
-      opacity: 0.7;
-      pointer-events: none;
-    }
+  position: fixed;
+  bottom: -10px;
+  font-size: 18px;
+  animation: flotar linear infinite;
+  opacity: 0.8;
+  pointer-events: none;
+}
+    .fade-out {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: all 0.5s ease;
+}
 
-    @keyframes flotar {
-      from { transform: translateY(100vh); }
-      to { transform: translateY(-10vh); }
-    }
+.fade-in {
+  opacity: 1;
+  transform: scale(1);
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes flotar {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(-110vh) scale(1.5);
+    opacity: 0;
+  }
+}
+
+  
+    @keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 
     /* Pequeñas mejoras para móviles */
     @media (max-width: 420px) {
@@ -180,27 +238,31 @@
 
 <script>
   function iniciar() {
-    document.getElementById("musica").play();
+    
+  const musica = document.getElementById("musica");
+  musica.volume = 0;
+  musica.play();
 
-    // Insertamos la pregunta y añadimos la imagen "fotoProp.jpeg" debajo del mensaje.
-    // La clase "full" hace que la imagen se muestre completa (object-fit: contain).
-    /*document.getElementById("contenido").innerHTML = `
-      <h1>¿Quieres ser mi novia? 💍</h1>
+  // fade in
+  let vol = 0;
+  const fade = setInterval(() => {
+    if (vol < 1) {
+      vol += 0.05;
+      musica.volume = vol;
+    } else {
+      clearInterval(fade);
+    }
+  }, 200);
 
-      <div class="texto">
-        
-       
-        <div class="button-row"><button type="button" class="cta" onclick="final()">Sí ❤️</button></div>
-      </div>
+  transicionContenido();
+}
+  function transicionContenido() {
+  const cont = document.getElementById("contenido");
 
-      <!-- Imagen fotoProp debajo del cuadro de mensaje; usamos la clase "full" para que no se recorte -->
-      <div class="foto full" aria-hidden="false" style="margin-top:12px;">
-        <img src="fotoProp.jpeg" alt="Foto especial">
-      </div>
-    `; */
+  cont.classList.add("fade-out");
 
-    /* Si quieres la imagen arriba del cuadro, usa este template en lugar del de arriba:*/
-    document.getElementById("contenido").innerHTML = `
+  setTimeout(() => {
+    cont.innerHTML = `
       <div class="foto full">
         <img src="fotoProp.jpeg" alt="Foto especial">
       </div>
@@ -208,28 +270,57 @@
       <h1>¿Quieres ser mi novia? 💍</h1>
 
       <div class="texto">
-       
-        <div class="button-row"><button type="button" class="cta" onclick="final()">Sí ❤️</button></div>
+        <p>He pensado en ti todos los días, y hoy quiero preguntarte algo muy importante.</p>
+        <p>¿Quieres ser mi novia?</p>
+        <div class="button-row">
+          <button type="button" class="cta" onclick="final()">Sí ❤️</button>
+        </div>
       </div>
     `;
-    
 
-    // Aseguramos que el CTA quede visible en pantalla (especialmente en iOS)
-    setTimeout(() => {
-      const cta = document.querySelector('.cta');
-      if (cta) cta.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 300);
-  }
+    cont.classList.remove("fade-out");
+    cont.classList.add("fade-in");
+  }, 500);
+}
+  
 
   function final() {
-    document.getElementById("contenido").innerHTML = `
+   
+  const cont = document.getElementById("contenido");
+
+  cont.classList.add("fade-out");
+
+  setTimeout(() => {
+    cont.innerHTML = `
       <h1>Te amo, Wendoline ❤️</h1>
       <div class="texto">
         <p>Gracias por decir que sí.<br>
-        Este es solo el comienzo.</p>
+        Este es solo el comienzo 💖</p>
       </div>
     `;
-  }
+
+    cont.classList.remove("fade-out");
+    cont.classList.add("fade-in");
+  }, 500);
+}
+  function crearCorazon() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "💖";
+
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+  heart.style.fontSize = (14 + Math.random() * 20) + "px";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 8000);
+}
+
+// cada cierto tiempo crea corazones
+setInterval(crearCorazon, 500);
 
  
 </script>
