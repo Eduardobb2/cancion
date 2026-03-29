@@ -1,15 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Para Wendoline ❤️ </title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --safe-bottom: env(safe-area-inset-bottom);
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(180deg, #ff9a9e, #fad0c4);
+      background-attachment: fixed; /* Fondo fijo */
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Georgia', serif;
+      /* Permitimos scroll en la pantalla */
+      padding: 20px;
+      padding-bottom: calc(20px + var(--safe-bottom)); /* espacio extra para home indicator */
+    }
+
+    .card {
+      background: white;
+      padding: 22px;
+      border-radius: 22px;
+      text-align: center;
+      width: 100%;
+      max-width: 480px; /* mayor ancho para lectura */
+      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+      animation: aparecer 1.4s ease;
+      max-height: calc(100vh - 80px);
+      overflow-y: auto; /* permite scroll dentro de la tarjeta */
+      padding-bottom: calc(22px + var(--safe-bottom)); /* asegura espacio debajo del contenido */
+    }
+
+    .foto {
+      width: 100%;
+      height: 38vh;
+      max-height: 320px;
+      border-radius: 18px;
+      overflow: hidden;
+      margin-bottom: 16px;
+      background: #000; /* evita franjas blancas si la imagen no llena el área */
+    }
+
+    .foto img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* CLAVE: por defecto las fotos se recortan para cubrir */
+      object-position: center;
+      display: block;
+    }
+
+    /* Estilos para mostrar la foto completa sin recorte */
+    .foto.full {
+      height: auto;              /* la caja ajusta su altura al contenido */
+      max-height: 60vh;         /* límite razonable para móviles */
+      border-radius: 12px;
+      background: #000;         /* fondo oscuro si hay espacio vacío */
+    }
+
+    .foto.full img {
+      width: 100%;
+      height: auto;             /* altura automática para que no se recorte */
+      max-height: 60vh;
+      object-fit: contain;      /* importante: muestra la imagen completa */
+      object-position: center top;
+      display: block;
+    }
+
+    h1 {
+      color: #e63950;
+      margin: 8px 0 10px;
+    }
+
+    .texto {
+      color: #444;
+      font-size: 16px;
+      line-height: 1.7;
+      margin: 10px 0;
+      text-align: left; /* Mejor lectura en párrafos largos */
+    }
+
+    .texto p {
+      margin: 0 0 12px 0;
+    }
+
+    .destacado {
+      color: #e63950;
+      font-weight: 700;
+    }
+
+    .button-row {
+      text-align: center;
+      margin-top: 12px;
+      padding-bottom: 6px; /* pequeño espacio extra */
+    }
+
+    /* Hacemos que el CTA se quede por encima del home indicator y de barras */
+    .cta {
+      background: #e63950;
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 17px;
+      border-radius: 30px;
+      cursor: pointer;
+      display: inline-block;
+      position: sticky;
+      bottom: calc(12px + var(--safe-bottom));
+      z-index: 6;
+    }
+
+    @keyframes aparecer {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 20px;
+      animation: flotar 7s linear infinite;
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    @keyframes flotar {
+      from { transform: translateY(100vh); }
+      to { transform: translateY(-10vh); }
+    }
+
+    /* Pequeñas mejoras para móviles */
+    @media (max-width: 420px) {
+      .card { padding: 18px; border-radius: 16px; }
+      h1 { font-size: 22px; }
+      .texto { font-size: 15px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<audio id="musica" src="amor.m4a"></audio>
+
+<div class="card" id="contenido">
+  <div class="foto">
+    <img src="foto.jpeg" alt="Yo">
+  </div>
+
+  <h1>Wendoline </h1>
+
+  <div class="texto" aria-label="Mensaje para Wendoline">
+    <p>Hola chiquita bonita, ¿cómo estás? Espero que estés muy bien.</p>
+
+      <p>Para cuando leas esto, espero que estés junto a mí — cenando en un restaurante, en el parque, en la playa o en algún lugar especial. Si no estás en un lugar así no importa; solo quiero decirte que todo este tiempo que llevo conociéndote me he dado cuenta de la gran persona que eres, y que no hay ni habrá alguien más como tú.</p>
+
+   
+    <p>Eres lo mejor que me ha pasado en la vida. Me has ayudado en muchísimas cosas, me has dado amor y cariño de mil formas que ni siquiera alcanzo a reaccionar.</p>
+
+    <p>Aquellos detalles como regalarme ropa de la paca, hacerme un video bien bonito de nosotros, darme de comer, llevarme al cine a ver mi pelicula favorita, regalarme detallitos, flores, y la decoracion sopresa de mi cumpleaños fue algo demasiado bonito de tu parte que nunca se me va a olvidar, sobre todo porque ni siquiera mis papas lo habrian hecho. Todo lo guardo en el corazon, y lo aprecio muchisimo.</p>
+    <p>Por todo tu amor, tu personalidad, tu forma de pensar, tu apoyo, tu preocupacion, tus inteligencia, tu paciencia, tu fisico(bien chula), tu familia, tus planes, tus ganas de ayudar a los demas, el camino que hemos tomado juntos. Todo hace que te vea como mi futura esposa, mi acompañante de vida, con la que quiero vivir con muchos perritos y chamaquillos. </p>
+  <p class="destacado">No fue casualidad.<br>Fue destino, fue tiempo,<br>y fueron ganas de elegirte.</p>
+  </div>
+
+  <div class="button-row">
+    <button type="button" class="cta" onclick="iniciar()" aria-label="Tocar para preguntar">Toca aquí 💖</button>
+  </div>
+</div>
+
 <script>
-// Existing code
+  function iniciar() {
+    document.getElementById("musica").play();
 
-function final() {
-    // ... other existing code
-    setInterval(createHeart, 500); // Moved inside final
-}
+    // Insertamos la pregunta y añadimos la imagen "fotoProp.jpeg" debajo del mensaje.
+    // La clase "full" hace que la imagen se muestre completa (object-fit: contain).
+    document.getElementById("contenido").innerHTML = `
+      <h1>¿Quieres ser mi novia? 💍</h1>
 
-// Event listener for "Sí" button
-document.getElementById('yesButton').addEventListener('click', function() {
-    final(); // Start animation when clicked
-});
+      <div class="texto">
+        <p>He pensado en ti todos los días, y hoy quiero preguntarte algo muy importante.</p>
+       
+        <div class="button-row"><button type="button" class="cta" onclick="final()">Sí ❤️</button></div>
+      </div>
 
-// Existing code
+      <!-- Imagen fotoProp debajo del cuadro de mensaje; usamos la clase "full" para que no se recorte -->
+      <div class="foto full" aria-hidden="false" style="margin-top:12px;">
+        <img src="fotoProp.jpeg" alt="Foto especial">
+      </div>
+    `;
+
+    /* Si quieres la imagen arriba del cuadro, usa este template en lugar del de arriba:
+    document.getElementById("contenido").innerHTML = `
+      <div class="foto full">
+        <img src="fotoProp.jpeg" alt="Foto especial">
+      </div>
+
+      <h1>¿Quieres ser mi novia? 💍</h1>
+
+      <div class="texto">
+        <p>He pensado en ti todos los días, y hoy quiero preguntarte algo muy importante.</p>
+        <p>¿Quieres ser mi novia?</p>
+        <div class="button-row"><button type="button" class="cta" onclick="final()">Sí ❤️</button></div>
+      </div>
+    `;
+    */
+
+    // Aseguramos que el CTA quede visible en pantalla (especialmente en iOS)
+    setTimeout(() => {
+      const cta = document.querySelector('.cta');
+      if (cta) cta.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 300);
+  }
+
+  function final() {
+    document.getElementById("contenido").innerHTML = `
+      <h1>Te amo, Wendoline ❤️</h1>
+      <div class="texto">
+        <p>Gracias por decir que sí.<br>
+        Este es solo el comienzo.</p>
+      </div>
+    `;
+  }
+
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 7000);
+  }, 450);
 </script>
+
+</body>
+</html>
