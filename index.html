@@ -41,7 +41,11 @@
   width: 100%;
   max-width: 480px;
 
+
   box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+overflow-y: auto
+max-height
+padding-bottom
   border: 1px solid rgba(255,255,255,0.3);
 
   animation: aparecer 1.4s ease;
@@ -162,6 +166,22 @@
   transform: scale(1);
   animation: fadeIn 0.6s ease;
 }
+    .confetti {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background-color: red;
+  top: 0;
+  animation: caer 3s linear forwards;
+  z-index: 999;
+}
+
+@keyframes caer {
+  to {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
 
 @keyframes fadeIn {
   from {
@@ -235,7 +255,7 @@
     <button type="button" class="cta" onclick="iniciar()" aria-label="Tocar para preguntar">Toca aquí </button>
   </div>
 </div>
-
+<audio id="pop" src="pop.mp3"></audio>
 <script>
   function iniciar() {
     
@@ -285,8 +305,7 @@
   
 
   function final() {
-   
-  const cont = document.getElementById("contenido");
+     const cont = document.getElementById("contenido");
 
   cont.classList.add("fade-out");
 
@@ -301,7 +320,20 @@
 
     cont.classList.remove("fade-out");
     cont.classList.add("fade-in");
+
+    // 💥 TODO EL SHOW
+    explosionCorazones();
+    lanzarConfetti();
+
+    const pop = document.getElementById("pop");
+    if (pop) pop.play();
+
+    if (navigator.vibrate) {
+      navigator.vibrate([200, 100, 200, 300]);
+    }
+
   }, 500);
+ 
 }
   function crearCorazon() {
   const heart = document.createElement("div");
@@ -319,8 +351,33 @@
   }, 8000);
 }
 
-// cada cierto tiempo crea corazones
-setInterval(crearCorazon, 500);
+
+function explosionCorazones() {
+  let count = 0;
+
+  const intervalo = setInterval(() => {
+    crearCorazon();
+    count++;
+
+    if (count > 40) { // cantidad de corazones
+      clearInterval(intervalo);
+    }
+  }, 100);
+}
+  function lanzarConfetti() {
+  for (let i = 0; i < 80; i++) {
+    const conf = document.createElement("div");
+    conf.className = "confetti";
+
+    conf.style.left = Math.random() * 100 + "vw";
+    conf.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
+    conf.style.animationDuration = (2 + Math.random() * 2) + "s";
+
+    document.body.appendChild(conf);
+
+    setTimeout(() => conf.remove(), 3000);
+  }
+}
 
  
 </script>
