@@ -75,10 +75,11 @@ padding-bottom
 
     /* Estilos para mostrar la foto completa sin recorte */
     .foto.full {
-      height: auto;              /* la caja ajusta su altura al contenido */
-      max-height: 60vh;         /* límite razonable para móviles */
-      border-radius: 12px;
-      background: #000;         /* fondo oscuro si hay espacio vacío */
+      height: auto;
+  max-height: 60vh;
+  min-height: 200px; /* 👈 esto evita el brinco */
+  border-radius: 12px;
+  background: #000;    /* fondo oscuro si hay espacio vacío */
     }
 
     .foto.full img {
@@ -277,30 +278,35 @@ padding-bottom
   transicionContenido();
 }
   function transicionContenido() {
-  const cont = document.getElementById("contenido");
+   const cont = document.getElementById("contenido");
 
   cont.classList.add("fade-out");
 
-  setTimeout(() => {
-    cont.innerHTML = `
-      <div class="foto full">
-        <img src="fotoProp.jpeg" alt="Foto especial">
-      </div>
+  // 👇 PRE-CARGAMOS LA IMAGEN
+  const img = new Image();
+  img.src = "fotoProp.jpeg";
 
-      <h1>¿Quieres ser mi novia? 💍</h1>
-
-      <div class="texto">
-        <p>He pensado en ti todos los días, y hoy quiero preguntarte algo muy importante.</p>
-        <p>¿Quieres ser mi novia?</p>
-        <div class="button-row">
-          <button type="button" class="cta" onclick="final()">Sí ❤️</button>
+  img.onload = () => {
+    setTimeout(() => {
+      cont.innerHTML = `
+        <div class="foto full">
+          <img src="fotoProp.jpeg" alt="Foto especial">
         </div>
-      </div>
-    `;
 
-    cont.classList.remove("fade-out");
-    cont.classList.add("fade-in");
-  }, 500);
+        <h1>¿Quieres ser mi novia? 💍</h1>
+
+        <div class="texto">
+        
+          <div class="button-row">
+            <button type="button" class="cta" onclick="final()">Sí ❤️</button>
+          </div>
+        </div>
+      `;
+
+      cont.classList.remove("fade-out");
+      cont.classList.add("fade-in");
+    }, 200);
+  };
 }
   
 
