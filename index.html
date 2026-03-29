@@ -184,7 +184,7 @@
 
     // Insertamos la pregunta y añadimos la imagen "fotoProp.jpeg" debajo del mensaje.
     // La clase "full" hace que la imagen se muestre completa (object-fit: contain).
-    document.getElementById("contenido").innerHTML = `
+    /*document.getElementById("contenido").innerHTML = `
       <h1>¿Quieres ser mi novia? 💍</h1>
 
       <div class="texto">
@@ -197,9 +197,9 @@
       <div class="foto full" aria-hidden="false" style="margin-top:12px;">
         <img src="fotoProp.jpeg" alt="Foto especial">
       </div>
-    `;
+    `; */
 
-    /* Si quieres la imagen arriba del cuadro, usa este template en lugar del de arriba:
+    /* Si quieres la imagen arriba del cuadro, usa este template en lugar del de arriba:*/
     document.getElementById("contenido").innerHTML = `
       <div class="foto full">
         <img src="fotoProp.jpeg" alt="Foto especial">
@@ -213,7 +213,7 @@
         <div class="button-row"><button type="button" class="cta" onclick="final()">Sí ❤️</button></div>
       </div>
     `;
-    */
+    
 
     // Aseguramos que el CTA quede visible en pantalla (especialmente en iOS)
     setTimeout(() => {
