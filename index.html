@@ -176,6 +176,33 @@ padding-bottom
   animation: caer 3s linear forwards;
   z-index: 999;
 }
+    .collage{
+    position:relative;
+    width:100%;
+    height:70vh;
+    overflow:hidden;
+}
+
+.collage img{
+    position:absolute;
+    width:42%;
+    border-radius:16px;
+    object-fit:cover;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.35);
+
+    transition:all .8s ease;
+    animation:zoomFoto 3s linear forwards;
+}
+
+@keyframes zoomFoto{
+    from{
+        transform:scale(1) rotate(var(--rot));
+    }
+    to{
+        transform:scale(1.08) rotate(var(--rot));
+    }
+}
 
 @keyframes caer {
   to {
@@ -309,25 +336,32 @@ padding-bottom
   };
 }
   
-
-  function final() {
-     const cont = document.getElementById("contenido");
+function final() {
+  const cont = document.getElementById("contenido");
 
   cont.classList.add("fade-out");
 
   setTimeout(() => {
     cont.innerHTML = `
       <h1>Te amo, Wendoline ❤️</h1>
+
       <div class="texto">
-        <p>Gracias por decir que sí.<br>
-        Este es solo el comienzo 💖</p>
+        <p>
+          Gracias por decir que sí.<br>
+          Este es solo el comienzo. 💖
+        </p>
+      </div>
+
+      <div class="button-row">
+        <button class="cta" onclick="mostrarRecuerdos()">
+          ❤️ Nuestros recuerdos
+        </button>
       </div>
     `;
 
     cont.classList.remove("fade-out");
     cont.classList.add("fade-in");
 
-    // 💥 TODO EL SHOW
     explosionCorazones();
     lanzarConfetti();
 
@@ -335,12 +369,14 @@ padding-bottom
     if (pop) pop.play();
 
     if (navigator.vibrate) {
-      navigator.vibrate([200, 100, 200, 300]);
+      navigator.vibrate([200,100,200,300]);
     }
 
-  }, 500);
- 
+  },500);
 }
+
+ 
+
   function crearCorazon() {
   const heart = document.createElement("div");
   heart.className = "heart";
@@ -385,6 +421,87 @@ function explosionCorazones() {
   }
 }
 
+  const fotos=[];
+
+for(let i=1;i<=21;i++){
+    fotos.push(`foto${i}.jpeg`);
+}
+
+let orden=[];
+let indice=0;
+let intervalo;
+
+function mezclar(a){
+
+    for(let i=a.length-1;i>0;i--){
+
+        const j=Math.floor(Math.random()*(i+1));
+
+        [a[i],a[j]]=[a[j],a[i]];
+    }
+
+    return a;
+}
+
+function mostrarRecuerdos(){
+
+    const cont=document.getElementById("contenido");
+
+    cont.innerHTML=`
+        <h1>❤️ Nuestros recuerdos ❤️</h1>
+        <div class="collage" id="collage"></div>
+    `;
+
+    orden=mezclar([...fotos]);
+
+    indice=0;
+
+    cambiarCollage();
+
+    intervalo=setInterval(cambiarCollage,3000);
+}
+
+function cambiarCollage(){
+
+    const collage=document.getElementById("collage");
+
+    if(indice>=orden.length){
+
+        orden=mezclar([...fotos]);
+
+        indice=0;
+    }
+
+    collage.innerHTML="";
+
+    const posiciones=[
+        {top:"2%",left:"4%"},
+        {top:"8%",right:"4%"},
+        {bottom:"5%",left:"10%"},
+        {bottom:"2%",right:"10%"}
+    ];
+
+    for(let i=0;i<4;i++){
+
+        if(indice>=orden.length){
+
+            orden=mezclar([...fotos]);
+
+            indice=0;
+        }
+
+        const img=document.createElement("img");
+
+        img.src=orden[indice++];
+
+        img.style.setProperty("--rot",(Math.random()*8-4)+"deg");
+
+        Object.assign(img.style,posiciones[i]);
+
+        collage.appendChild(img);
+    }
+
+}
  
 </script>
 
