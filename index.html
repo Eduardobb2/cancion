@@ -1,3 +1,4 @@
+@@ -1,392 +1,509 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -147,7 +148,7 @@ padding-bottom
       to { opacity: 1; transform: translateY(0); }
     }
 
-    
+
     .heart {
   position: fixed;
   bottom: -10px;
@@ -167,8 +168,15 @@ padding-bottom
   transform: scale(1);
   animation: fadeIn 0.6s ease;
 }
-   
-
+    .confetti {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background-color: red;
+  top: 0;
+  animation: caer 3s linear forwards;
+  z-index: 999;
+}
     .collage{
     position:relative;
     width:100%;
@@ -185,7 +193,7 @@ padding-bottom
     box-shadow:0 8px 20px rgba(0,0,0,.35);
 
     transition:all .8s ease;
-    animation:zoomFoto 5s linear forwards;
+    animation:zoomFoto 3s linear forwards;
 }
 
 @keyframes zoomFoto{
@@ -226,7 +234,7 @@ padding-bottom
   }
 }
 
-  
+
     @keyframes gradientMove {
   0% {
     background-position: 0% 50%;
@@ -257,14 +265,14 @@ padding-bottom
     <img src="foto.jpeg" alt="Yo">
   </div>
 
- 
+  <h1>Wendoline </h1>
 
   <div class="texto" aria-label="Mensaje para Wendoline">
     <p>Hola chiquita bonita, ¿cómo estás? Espero que estés muy bien.</p>
 
       <p>Para cuando leas esto, espero que estés junto a mí — cenando en un restaurante, en el parque, en la playa o en algún lugar especial. Si no estás en un lugar así no importa; solo quiero decirte que todo este tiempo que llevo conociéndote me he dado cuenta de la gran persona que eres, y que no hay ni habrá alguien más como tú.</p>
 
-   
+
     <p>Eres lo mejor que me ha pasado en la vida. Me has ayudado en muchísimas cosas, me has dado amor y cariño de mil formas que ni siquiera alcanzo a reaccionar.</p>
 
     <p>Aquellos detalles como regalarme ropa de la paca, hacerme un video bien bonito de nosotros, darme de comer, llevarme al cine a ver mi pelicula favorita, regalarme detallitos, flores, y la decoracion sopresa de mi cumpleaños fue algo demasiado bonito de tu parte que nunca se me va a olvidar, sobre todo porque ni siquiera mis papas lo habrian hecho. Todo lo guardo en el corazon, y lo aprecio muchisimo.</p>
@@ -279,7 +287,7 @@ padding-bottom
 <audio id="pop" src="pop.mp3"></audio>
 <script>
   function iniciar() {
-    
+
   const musica = document.getElementById("musica");
   musica.volume = 0;
   musica.play();
@@ -318,7 +326,7 @@ padding-bottom
         <div class="texto">
         
           <div class="button-row">
-            <button type="button" class="cta" onclick="final()">Sí </button>
+            <button type="button" class="cta" onclick="final()">Sí ❤️</button>
           </div>
         </div>
       `;
@@ -328,7 +336,10 @@ padding-bottom
     }, 200);
   };
 }
-  
+
+
+  function final() {
+     const cont = document.getElementById("contenido");
 function final() {
   const cont = document.getElementById("contenido");
 
@@ -336,18 +347,20 @@ function final() {
 
   setTimeout(() => {
     cont.innerHTML = `
-      <h1>Te amo, Wendoline </h1>
+      <h1>Te amo, Wendoline ❤️</h1>
 
       <div class="texto">
+        <p>Gracias por decir que sí.<br>
+        Este es solo el comienzo 💖</p>
         <p>
           Gracias por decir que sí.<br>
-          Este es solo el comienzo. 
+          Este es solo el comienzo. 💖
         </p>
       </div>
 
       <div class="button-row">
         <button class="cta" onclick="mostrarRecuerdos()">
-          Nuestros recuerdos
+          ❤️ Nuestros recuerdos
         </button>
       </div>
     `;
@@ -355,16 +368,20 @@ function final() {
     cont.classList.remove("fade-out");
     cont.classList.add("fade-in");
 
+    // 💥 TODO EL SHOW
     explosionCorazones();
-  
+    lanzarConfetti();
 
     const pop = document.getElementById("pop");
     if (pop) pop.play();
 
     if (navigator.vibrate) {
+      navigator.vibrate([200, 100, 200, 300]);
       navigator.vibrate([200,100,200,300]);
     }
 
+  }, 500);
+ 
   },500);
 }
 
@@ -373,7 +390,7 @@ function final() {
   function crearCorazon() {
   const heart = document.createElement("div");
   heart.className = "heart";
-  heart.innerHTML = "❤️";
+  heart.innerHTML = "💖";
 
   heart.style.left = Math.random() * 100 + "vw";
   heart.style.animationDuration = (4 + Math.random() * 4) + "s";
@@ -399,11 +416,24 @@ function explosionCorazones() {
     }
   }, 100);
 }
- 
+  function lanzarConfetti() {
+  for (let i = 0; i < 80; i++) {
+    const conf = document.createElement("div");
+    conf.className = "confetti";
+
+    conf.style.left = Math.random() * 100 + "vw";
+    conf.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
+    conf.style.animationDuration = (2 + Math.random() * 2) + "s";
+
+    document.body.appendChild(conf);
+
+    setTimeout(() => conf.remove(), 3000);
+  }
+}
 
   const fotos=[];
 
-for(let i=1;i<=4;i++){
+for(let i=1;i<=21;i++){
     fotos.push(`foto${i}.jpeg`);
 }
 
@@ -428,7 +458,7 @@ function mostrarRecuerdos(){
     const cont=document.getElementById("contenido");
 
     cont.innerHTML=`
-        <h1> Nuestros recuerdos </h1>
+        <h1>❤️ Nuestros recuerdos ❤️</h1>
         <div class="collage" id="collage"></div>
     `;
 
@@ -438,7 +468,7 @@ function mostrarRecuerdos(){
 
     cambiarCollage();
 
-    intervalo=setInterval(cambiarCollage,5000);
+    intervalo=setInterval(cambiarCollage,3000);
 }
 
 function cambiarCollage(){
@@ -482,7 +512,7 @@ function cambiarCollage(){
     }
 
 }
- 
+
 </script>
 
 </body>
