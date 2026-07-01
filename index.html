@@ -44,16 +44,15 @@
 
 
   box-shadow: 0 12px 40px rgba(0,0,0,0.25);
-overflow-y: auto
-max-height
-padding-bottom
-  border: 1px solid rgba(255,255,255,0.3);
+border: 1px solid rgba(255,255,255,0.3);
+
+max-height: calc(100vh - 80px);
+overflow-y: auto;
+padding-bottom: calc(22px + var(--safe-bottom));
 
   animation: aparecer 1.4s ease;
 
-  max-height: calc(100vh - 80px);
-  overflow-y: auto;
-  padding-bottom: calc(22px + var(--safe-bottom));
+  
     }
 
     .foto {
@@ -373,10 +372,8 @@ function final() {
 
     if (navigator.vibrate) {
       navigator.vibrate([200, 100, 200, 300]);
-      navigator.vibrate([200,100,200,300]);
+      
     }
-
-  }, 500);
  
   },500);
 }
