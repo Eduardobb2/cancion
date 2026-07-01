@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <title>Para Wendoline ❤️ </title>
 
   <style>
@@ -176,6 +177,7 @@ padding-bottom: calc(22px + var(--safe-bottom));
   animation: caer 3s linear forwards;
   z-index: 999;
 }
+    
     .collage{
     position:relative;
     width:100%;
@@ -451,11 +453,20 @@ function mostrarRecuerdos(){
 
     const cont=document.getElementById("contenido");
 
-    cont.innerHTML=`
-        <h1> Nuestros recuerdos ❤️</h1>
-        <div class="collage" id="collage"></div>
-    `;
+   cont.innerHTML = `
+    <h1 style="
+        font-family: 'Montserrat', sans-serif;
+        font-size: 34px;
+        font-weight: 700;
+        color: #e63950;
+        letter-spacing: 1px;
+        margin-bottom: 25px;
+    ">
+        Nuestros recuerdos 
+    </h1>
 
+    <div class="collage" id="collage"></div>
+`;
     orden=mezclar([...fotos]);
 
     indice=0;
